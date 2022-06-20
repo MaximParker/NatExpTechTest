@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tech Test</title>
+    <title>Foo Bar</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,7 +16,7 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Tech Test</a>
+          <a class="navbar-brand fw-bold" href="#">Foo Bar</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -46,12 +46,13 @@
                 >
               </li>
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex" id="login">
               <input
+                id="loginInput"
                 class="form-control me-2"
-                type="search"
-                placeholder="Your username..."
-                aria-label="Search"
+                type="input"
+                placeholder="Username..."
+                aria-label="login"
               />
               <button class="btn btn-outline-success" type="submit">
                 Apply
@@ -65,58 +66,91 @@
     <main>
       <div>
         <div class="maintxt">
-          <h1>Welcome</h1>
+          <h1 id="welcome-text">Welcome</h1>
         </div>
       </div>
 
       <div class="container marketing">
         <div class="row mt-4">
           <div class="col-lg-4">
-            <h2 class="fw-normal">Lorem ipsum</h2>
-            <p>
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-              posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
-              vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget
-              malesuada. Proin eget tortor risus.
-            </p>
-          </div>
-          <div class="col-lg-4">
-            <h2 class="fw-normal">Dolor sit amet</h2>
-            <p>
-              Cras ultricies ligula sed magna dictum porta. Pellentesque in
-              ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt.
-              Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec
-              rutrum congue leo eget malesuada. Vivamus magna justo, lacinia
-              eget consectetur sed, convallis at tellus. Nulla quis lorem ut
-              libero malesuada feugiat.
-            </p>
-          </div>
-          <div class="col-lg-4">
-            <h2 class="fw-normal">Find a Pokemon</h2>
+            <h2 class="fw-normal">Find a Pokémon</h2>
             <form id="getPokemon" class="">
               <div class="form-group">
+                <div id="APIResponse"> </div>
+                <br/>
                 <input
                   type="text"
                   placeholder="ID number..."
                   id="inputBox"
                   class="form-control me-2"
                 />
+                <br />
                 <button id="getRequest" type="submit" class="btn btn-outline-success">
                   Get &raquo;
                 </button>
             </form>
-            <div id="APIResponse"></div>
           </div>
         </div>
+        
+        <div class="col-lg-4">
+          <h2 class="fw-normal">Lorem ipsum</h2>
+          <p>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+            posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
+            vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget
+            malesuada. Proin eget tortor risus.
+          </p>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="fw-normal">Dolor sit amet</h2>
+          <p>
+            Cras ultricies ligula sed magna dictum porta. Pellentesque in
+            ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt.
+            Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec
+            rutrum congue leo eget malesuada. Vivamus magna justo, lacinia
+            eget consectetur sed, convallis at tellus. Nulla quis lorem ut
+            libero malesuada feugiat.
+          </p>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="fw-normal">Dolor sit amet</h2>
+          <p>
+            Cras ultricies ligula sed magna dictum porta. Pellentesque in
+            ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt.
+            Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec
+            rutrum congue leo eget malesuada. Vivamus magna justo, lacinia
+            eget consectetur sed, convallis at tellus. Nulla quis lorem ut
+            libero malesuada feugiat.
+          </p>
+        </div>
       </div>
+
       <hr />
+
       <script>
+        const userData = localStorage.getItem('username');
+        console.log(userData)
+        if (userData) {
+          document.getElementById("welcome-text").innerHTML = `Welcome, ${userData}!`
+        }
+
+        document
+          .getElementById("login")
+          .addEventListener("submit", function(event) {
+            setUsername(document.getElementById("loginInput").value);
+            document.getElementById("welcome-text").innerHTML = `Welcome, ${userData}!`
+        })
+
+        function setUsername(x) {
+          localStorage.setItem('username', x.toString());
+        }
+
         document
           .getElementById("getPokemon")
           .addEventListener("submit", function(event) {
             event.preventDefault();
             fetchPokemon(document.getElementById("inputBox").value)
-          })
+        })
         
         function isNumeric(str) {
           if (typeof str != "string") return false // we only process strings!  
@@ -125,14 +159,14 @@
         }
 
         function fetchPokemon(x) {
-          let errorMessage = "Pokemon not found. Please enter a valid ID number."
+          let errorMessage = "Pokémon not found. Please enter a valid ID number."
           if (isNumeric(x)) {
             document.getElementById("APIResponse").innerHTML = "Loading..."
             fetch(`https://pokeapi.co/api/v2/pokemon/${x}`)
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              let formattedData = data.name;
+              let formattedData = `#${x}: ${data.name[0].toUpperCase() + data.name.substring(1)}`;
               document.getElementById("APIResponse").innerHTML = formattedData;
             })
             .catch(
@@ -148,8 +182,7 @@
       <footer class="container">
         <p class="float-end"><a href="#">Back to top</a></p>
         <p>
-          MaximParker &middot;
-          <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+          MaximParker &copy; 2022
         </p>
       </footer>
     </main>

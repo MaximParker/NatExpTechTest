@@ -14,7 +14,7 @@ Produce a homepage for a fictional brand
             ▪ On subsequent visits, a users name will be displayed on page
                 • This can be handled with local storage or cookies, does not require a back end to be developed
             ▪ Must accept only string input. For incorrect data values, an error message must be displayed
-        ◦ A form field which takes a users input and asynchronously calls an external API, processes the response and displays some data from the response on page. Response errors should be handled gracefully and display a clear text error message to users on page.
+        ✅ A form field which takes a users input and asynchronously calls an external API, processes the response and displays some data from the response on page. Response errors should be handled gracefully and display a clear text error message to users on page.
             ▪ Any api can be used, the only requirement is that you send a request asynchronously to an external source and process the response for display on page. Any vanilla JS method for this is acceptable. A list of free to use APIs is here https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/ or you can find your own.
                 • EG: Use the coinbase API to retrieve price of a specific cryptocurrency based on the users input.
                 • EG: Use a weather API to retrieve temperature data for a location based on users input
