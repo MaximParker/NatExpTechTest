@@ -2,13 +2,13 @@
 
 Produce a homepage for a fictional brand
 
-    • Must utilise bootstrap for layout
-    • Besides bootstrap no other JS libraries can be used
-    • Must utilise a separate custom stylesheet that makes a change to the default bootstrap styling
-    • Must be responsive and work correctly on differing browser sizes
+    ✅ Must utilise bootstrap for layout
+    ✅ Besides bootstrap no other JS libraries can be used
+    ✅ Must utilise a separate custom stylesheet that makes a change to the default bootstrap styling
+    ✅ Must be responsive and work correctly on differing browser sizes
         ◦ Must work correctly across Edge, Chrome, Safari and Firefox (current versions, support for legacy versions is not required)
-    • Must include at least one H1, H2. P, UL and LI element
-    • Must include at least one image
+    ✅ Must include at least one H1, H2. P, UL and LI element
+    ✅ Must include at least one image
     • Must include 2 interactive elements
         ◦ A form field which a user can input their name into
             ▪ On subsequent visits, a users name will be displayed on page

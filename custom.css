@@ -1,3 +1,27 @@
-h1 {
-    color: chocolate;
+body {
+  background-color: rgb(236, 231, 228);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
 }
+
+h1 {
+  color: white;
+  font-size: 5vh;
+  font-weight: 1000;
+}
+
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.maintxt {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-image: url(images/background.png);
+  background-size: cover;
+  padding: 5vh;
+}
+
