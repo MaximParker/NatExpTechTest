@@ -113,14 +113,12 @@
           </p>
         </div>
         <div class="col-lg-4">
-          <h2 class="fw-normal">Dolor sit amet</h2>
+          <h2 class="fw-normal">Ella sum loquitor</h2>
           <p>
-            Cras ultricies ligula sed magna dictum porta. Pellentesque in
-            ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt.
+            Nulla porttitor accumsan tincidunt.
             Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec
             rutrum congue leo eget malesuada. Vivamus magna justo, lacinia
-            eget consectetur sed, convallis at tellus. Nulla quis lorem ut
-            libero malesuada feugiat.
+            eget consectetur sed, convallis at tellus. 
           </p>
         </div>
       </div>
@@ -128,23 +126,31 @@
       <hr />
 
       <script>
+        // Username observer
         const userData = localStorage.getItem('username');
         console.log(userData)
         if (userData) {
           document.getElementById("welcome-text").innerHTML = `Welcome, ${userData}!`
         }
 
+        // Username input handler
         document
           .getElementById("login")
           .addEventListener("submit", function(event) {
-            setUsername(document.getElementById("loginInput").value);
-            document.getElementById("welcome-text").innerHTML = `Welcome, ${userData}!`
+            let newUsername = document.getElementById("loginInput").value.replace(/[^\w\s]/gi, '');
+
+            if (newUsername) {
+              setUsername(newUsername);
+            } else {
+              alert("Please enter a valid username!");
+            }
         })
 
         function setUsername(x) {
           localStorage.setItem('username', x.toString());
         }
 
+        // Pokemon lookup handler
         document
           .getElementById("getPokemon")
           .addEventListener("submit", function(event) {
@@ -152,12 +158,13 @@
             fetchPokemon(document.getElementById("inputBox").value)
         })
         
+        // Numeric input sanitization
         function isNumeric(str) {
-          if (typeof str != "string") return false // we only process strings!  
-            return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+          if (typeof str != "string") return false
+            return !isNaN(str) && !isNaN(parseFloat(str))
         }
 
+        // API req/res handler
         function fetchPokemon(x) {
           let errorMessage = "Pokémon not found. Please enter a valid ID number."
           if (isNumeric(x)) {
